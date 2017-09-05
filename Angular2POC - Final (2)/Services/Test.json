@@ -1,0 +1,84 @@
+{
+  "movies": [
+    {
+      "id": 1,
+      "title": "The Mummy",
+      "rating": 2
+    },
+    {
+      "id": 2,
+      "title": "The Ring 2",
+      "rating": "3"
+    },
+    {
+      "id": 3,
+      "title": "Ice Age: Collision Course",
+      "rating": "5"
+    },
+    {
+      "id": 4,
+      "title": "Insidious: Chapter 3",
+      "rating": 3.7
+    },
+    {
+      "id": 5,
+      "title": "Into the Woods",
+      "rating": 1.05
+    },
+    {
+      "id": 6,
+      "title": "Into the Storm",
+      "rating": "5"
+    },
+    {
+      "id": 7,
+      "title": "Inside Llewyn Davis 2",
+      "rating": "2"
+    },
+    {
+      "id": 9,
+      "title": "It Follows",
+      "rating": "2"
+    },
+    {
+      "id": 10,
+      "title": "Inferno",
+      "rating": "2"
+    },
+    {
+      "title": "new",
+      "rating": "3",
+      "id": 11
+    },
+    {
+      "title": "fbdfb",
+      "rating": "4",
+      "id": 13
+    },
+    {
+      "title": "erhbftjn",
+      "rating": 1.58,
+      "id": 14
+    },
+    {
+      "title": "fhnghn",
+      "rating": "2",
+      "id": 15
+    },
+    {
+      "rating": 3.5,
+      "title": "rtghfh",
+      "id": 19
+    },
+    {
+      "rating": 2.3,
+      "title": "fbfb",
+      "id": 20
+    },
+    {
+      "rating": 2.7,
+      "title": "gfbfgb",
+      "id": 21
+    }
+  ]
+}

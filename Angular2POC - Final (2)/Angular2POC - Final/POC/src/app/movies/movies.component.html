@@ -1,0 +1,164 @@
+ 
+
+<div class="col-md-6 col-md-offset-3" style="margin-top: 45px; margin-bottom: 80px; color:black">
+   
+      <div class="row">
+          <!--username-->
+          <div class="col-sm-10"><h2><i>Welcome {{currentUser.username}}!</i></h2>
+          <!--<div class="col-sm-10"><h2><i>Welcome {{currentUser.firstName}}!</i></h2>-->
+          </div>
+          <!--logout-->
+          <div class="col-sm-2">
+          <div *ngIf="showingLogOut"><a [routerLink]="['/login']" (click)="hide()" style="color:black" name="Logout"><span class="glyphicon glyphicon-log-out" ></span>Logout</a> </div>
+          </div>
+      </div>
+
+      <div class="panel-body">
+        <div class="row">
+          <!--search title-->
+          <div class="col-md-4"> 
+              <input type="text" [(ngModel)]='searchFilter' name="searchtilte" placeholder="Movie Title"/><span class="glyphicon glyphicon-search" style="color:gray"></span>
+          </div>&nbsp;&nbsp;&nbsp;
+          <!--add movie-->
+          <div class="col-md-offset-3"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="#" data-toggle="modal" data-target="#myModal2" style="color:black" name="addmovie"><span class="glyphicon glyphicon-plus-sign" style="color:green"></span> Movies</a>
+          </div>
+      
+        </div>
+      </div>
+
+      <!--add Movies-->
+      <!--nested component addmovie-->
+      <div id="myModal2" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header" style="background-color:Silver ">
+            <h4 class="modal-title">Add Movie Here..!</h4>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            <app-addmovie></app-addmovie>
+            </div>
+            <div class="modal-footer" style="background-color:Silver ">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+     <!--movie list-->
+      <table class="table table-striped table-hover" *ngIf="movie && movie.length>0">
+              <thead>
+                  <tr >  
+                      <th class="pointer" name="titles" (click)="sort('title')"> Movie Title </th>
+                      <th class="pointer" name="ratings" (click)="sort('rating')"> Rating</th>
+                      <th>Favourite</th>
+                      <th>Delete Details</th>
+                      <th>Edit Details</th>
+                  </tr>
+              </thead>
+              <tbody>          
+                <tr *ngFor='let mov of movie | sortmovie: {property: column, direction: direction} | searchmovie: searchFilter ; let idx = index ;'  [class.active]="idx == selectedRow" >           
+                <td >{{mov.title}} </td>
+                <td><app-star [rating] ='mov.rating'></app-star></td>
+                <td *ngIf="idx==selectedRow"><span class="glyphicon glyphicon-heart"></span></td>
+                <td  *ngIf="idx!=selectedRow"><span class="glyphicon glyphicon-heart-empty" (click)="setClickedRow(idx,mov)"></span></td>
+                <td><a href="#" data-toggle="modal" data-target="#myModal4" (click)="setMovieDeleteid(mov.id,idx)"><span class="glyphicon glyphicon-trash" style="color:red" id="delete"></span></a></td>
+                <td><a href="#" data-toggle="modal" data-target="#myModal3" (click)="setMovieEditid(mov.id,idx)"><span class="glyphicon glyphicon-edit" id="editm"></span></a><td>
+                </tr>
+                </tbody>
+
+      </table>
+  
+      <!--edit Movies-->
+      <!--nested component edit movie-->
+      <div id="myModal3" class="modal fade" role="dialog" *ngIf="showEdit">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header" style="background-color:Silver ">
+            <h4 class="modal-title">Edit Books Here..!</h4>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            <!--<app-editmovie [ids]='editId' *ngIf="idPassed" ></app-editmovie>-->
+              <!--(movie)="movieGet($event)"-->
+               <!--(movies)="movie=$event"-->
+               <!---->
+               <div class="col-md-6 col-md-offset-3">
+    
+     <form name="form" (ngSubmit)="f.form.valid; id.value=''; title.value=''; rating.value='' " #f="ngForm" novalidate>
+       <div class="form-group" >
+            <label for="id">Movie Id</label>
+             <input type="text" class="form-control" name="id" [(ngModel)]="movieModel.id" #id required readonly/>
+           
+        </div>
+        <div class="form-group" >
+            <label for="title">Movie Title</label>
+             <input type="text" class="form-control" name="mtitle" [(ngModel)]="movieModel.title" #mtitle required max="15"/>
+           <div *ngIf="f.controls['mtitle'].hasError('required') && f.controls['mtitle'].touched" class="alert alert-danger">Movie title is required.</div>
+            <div *ngIf="f.controls['mtitle'].hasError('max')" class="alert alert-danger">Movie title  should not be more than 15 characters.</div>
+        </div>
+         <div class="form-group" >
+            <label for="rating">Rating</label>
+             <input type="number" step=0.01 min="1" max="5" class="form-control" name="mrating" [(ngModel)]="movieModel.rating" #mrating required />
+            <div *ngIf="f.controls['mrating'].hasError('required') && f.controls['mrating'].touched" class="alert alert-danger">Rating is required.</div>
+              <div *ngIf="f.controls['mrating'].hasError('max')" class="alert alert-danger">Rating should not be more than 5.</div>
+        </div>
+         
+         <div class="form-group">
+            <button [disabled]="!f.form.valid" class="btn btn-primary"  (click)="editMovies()" data-dismiss="modal" id="mvedit">Edit</button>
+            <a [routerLink]="['/movie']" class="btn btn-link" data-dismiss="modal">Cancel</a>
+        </div>
+                       
+     </form>
+
+</div>
+
+<!---->
+            </div>
+            <div class="modal-footer" style="background-color:Silver ">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!--delete Movies-->
+      <!--nested component delete movie-->
+      <div id="myModal4" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header" style="background-color:Silver ">
+            <h4 class="modal-title">Delete Books Here..!</h4>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            <!--<app-deletemovie [id]='deleteId' *ngIf="idPasse"></app-deletemovie>-->
+             <p>
+          Are you sure you want to delete?
+        </p>
+
+        <div class="form-group">
+            <button class="btn btn-primary" (click)="deleteMovie()" data-dismiss="modal" id="yesDelete">Delete</button>
+            <a [routerLink]="['/movie']" class="btn btn-link" data-dismiss="modal">Cancel</a>
+        </div>
+            </div>
+            <div class="modal-footer" style="background-color:Silver ">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+</div>
+

@@ -1,0 +1,47 @@
+
+
+.wrapper {	
+	margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.form-signin {
+  max-width: 380px;
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: gray;
+  border: 1px solid rgba(0,0,0,0.1);  
+
+}
+
+	/*input.ng-invalid{
+    border: 1px solid red;
+    }
+	.has-error.ng-invalid{
+    border: 1px solid red;
+    }*/
+
+ /* green */
+/*
+.ng-valid[required], .ng-valid.required  {
+  border: 1px solid #42A948;
+}*/
+/* red */
+/*
+.ng-invalid:not(form)  {
+  border: 1px solid #a94442; 
+}*/
+	
+
+	input[type="text"] {
+	  margin-bottom: -1px;
+	  border-bottom-left-radius: 0;
+	  border-bottom-right-radius: 0;
+	}
+
+	input[type="password"] {
+	  margin-bottom: 20px;
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+	}
+

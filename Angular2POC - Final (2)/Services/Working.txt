@@ -1,0 +1,6 @@
+Open command propt and type.
+----      json-server --watch Test.json  ----
+
+If json server not installed
+
+install json-server first.

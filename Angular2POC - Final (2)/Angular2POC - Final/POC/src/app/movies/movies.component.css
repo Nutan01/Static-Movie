@@ -1,0 +1,28 @@
+.table tr.active td {
+  background-color:gray !important;
+  color: white;
+}
+
+tr {
+width: 100%;
+display: inline-table;
+}
+
+table{
+ height:350px; 
+}
+
+tbody{
+  overflow-y: scroll;
+  height: 300px;
+  width: 100%;
+  position:absolute;
+}
+thead{
+  height: 30px;
+  width: 100%;
+ 
+}
+td {
+  width: 20%;
+}
